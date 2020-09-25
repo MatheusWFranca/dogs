@@ -1,5 +1,5 @@
 import React from 'react';
-import { TOKEN_POST, USER_GET, TOKEN_VALIDATE_POST } from './api';
+import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from './Api';
 import { useNavigate } from 'react-router-dom';
 
 export const UserContext = React.createContext();
@@ -7,7 +7,7 @@ export const UserContext = React.createContext();
 export const UserStorage = ({ children }) => {
   const [data, setData] = React.useState(null);
   const [login, setLogin] = React.useState(null);
-  const [loading, setloading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ export const UserStorage = ({ children }) => {
     async function () {
       setData(null);
       setError(null);
-      setloading(false);
+      setLoading(false);
       setLogin(false);
       window.localStorage.removeItem('token');
       navigate('/login');
@@ -34,7 +34,7 @@ export const UserStorage = ({ children }) => {
   async function userLogin(username, password) {
     try {
       setError(null);
-      setloading(true);
+      setLoading(true);
       const { url, options } = TOKEN_POST({ username, password });
       const tokenRes = await fetch(url, options);
       if (!tokenRes.ok) throw new Error(`Error: ${tokenRes.statusText}`);
@@ -46,7 +46,7 @@ export const UserStorage = ({ children }) => {
       setError(err.message);
       setLogin(false);
     } finally {
-      setloading(false);
+      setLoading(false);
     }
   }
 
@@ -56,7 +56,7 @@ export const UserStorage = ({ children }) => {
       if (token) {
         try {
           setError(null);
-          setloading(true);
+          setLoading(true);
           const { url, options } = TOKEN_VALIDATE_POST(token);
           const response = await fetch(url, options);
           if (!response.ok) throw new Error('Token Inválido');
@@ -64,7 +64,7 @@ export const UserStorage = ({ children }) => {
         } catch (err) {
           userLogout();
         } finally {
-          setloading(false);
+          setLoading(false);
         }
       } else {
         setLogin(false);

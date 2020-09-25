@@ -8,17 +8,17 @@ const types = {
   password: {
     regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
     message:
-      'Sua senha precisa ter 1 caracter maíusculo, 1 minúsculo e 1 digito, com no mínimo 8 caracteres',
+      'Sua senha precisa ter 1 caracter maíusculo, 1 minúsculo e 1 digito. Com no mínimo 8 caracteres.',
   },
 };
 
-const UseForm = (type) => {
+const useForm = (type) => {
   const [value, setValue] = React.useState('');
-  const [error, setError] = React.useState('');
+  const [error, setError] = React.useState(null);
 
   function validate(value) {
     if (type === false) return true;
-    if (value.lenght === 0) {
+    if (value.length === 0) {
       setError('Preencha um valor.');
       return false;
     } else if (types[type] && !types[type].regex.test(value)) {
@@ -45,4 +45,4 @@ const UseForm = (type) => {
   };
 };
 
-export default UseForm;
+export default useForm;

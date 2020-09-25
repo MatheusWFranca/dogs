@@ -9,7 +9,7 @@ body {
   margin: 0px;
   color: #333;
   --type-first: Helvetica, Arial, sans-serif;
-  --type-second: 'Spectral', georgia;
+  --type-second: 'Spectral', Georgia;
   font-family: var(--type-first);
 }
 
@@ -61,7 +61,7 @@ a {
   z-index: 1;
 }
 
-.title:after {
+.title::after {
   content: '';
   display: block;
   width: 1.5rem;
